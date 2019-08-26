@@ -5,7 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.*;
 
 @Entity
 public class GamePlayer {
@@ -23,6 +23,9 @@ public class GamePlayer {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "game_id")
     private Game game;
+
+    @OneToMany(mappedBy = "gamePlayer", fetch = FetchType.EAGER)
+    private Set<Ship> ships;
 
     public GamePlayer(){}
 
@@ -51,11 +54,19 @@ public class GamePlayer {
         return game;
     }
 
+    public Set<Ship> getShips() {
+        return ships;
+    }
+
     //Setters
     public void setPlayer(Player player){
         this.player = player;
     }
     public void setGame(Game game){
         this.game = game;
+    }
+
+    public void addShip(Ship ship){
+
     }
 }

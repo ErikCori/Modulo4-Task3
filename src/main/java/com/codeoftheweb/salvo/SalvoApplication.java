@@ -5,7 +5,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 
 @SpringBootApplication
@@ -16,7 +19,7 @@ public class SalvoApplication {
 		SpringApplication.run(SalvoApplication.class, args);
 	}
 	@Bean
-	public CommandLineRunner initData(PlayerRepository playerRepository, GameRepository gameRepository, GamePlayerRepository gamePlayerRepository){
+	public CommandLineRunner initData(PlayerRepository playerRepository, GameRepository gameRepository, GamePlayerRepository gamePlayerRepository, ShipRepository shipRepository){
 		return (args) -> {
 			//save  a couple of players
 			Player player1 = new Player("j.bauer@ctu.gov");
@@ -97,6 +100,32 @@ public class SalvoApplication {
 			gamePlayerRepository.save(gamePlayer15);
 			gamePlayerRepository.save(gamePlayer16);
 
+			//Save a couple of ships
+			String carrier = "Carrier";
+			String battleship = "Battleship";
+			String submarine = "Submarine";
+			String destroyer = "Destroyer";
+			String patrolBoat = "Patrol Boat";
+
+			Ship ship1 = new Ship(gamePlayer1, destroyer, Arrays.asList("H2", "H3", "H4"));
+			Ship ship2 = new Ship(gamePlayer1, submarine, Arrays.asList("E1", "F1", "G1"));
+			Ship ship3 = new Ship(gamePlayer1, patrolBoat, Arrays.asList("B4", "B5"));
+			Ship ship4 = new Ship(gamePlayer2, destroyer, Arrays.asList("B5", "C5", "D5"));
+			Ship ship5 = new Ship(gamePlayer2, patrolBoat, Arrays.asList("F1", "F2"));
+			Ship ship6 = new Ship(gamePlayer3, destroyer, Arrays.asList("B5", "C5", "D5"));
+			Ship ship7 = new Ship(gamePlayer3, patrolBoat, Arrays.asList("C6", "C7"));
+			Ship ship8 = new Ship(gamePlayer4, submarine, Arrays.asList("A2", "A3", "A4"));
+			Ship ship9 = new Ship(gamePlayer4, patrolBoat, Arrays.asList("G6", "H6"));
+
+			shipRepository.save(ship1);
+			shipRepository.save(ship2);
+			shipRepository.save(ship3);
+			shipRepository.save(ship4);
+			shipRepository.save(ship5);
+			shipRepository.save(ship6);
+			shipRepository.save(ship7);
+			shipRepository.save(ship8);
+			shipRepository.save(ship9);
 		};
 	}
 

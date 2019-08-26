@@ -1,9 +1,9 @@
 package com.codeoftheweb.salvo;
 
-import org.aspectj.weaver.GeneratedReferenceTypeDelegate;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,16 +13,20 @@ public class Ship {
     @GenericGenerator(name = "native", strategy = "native")
     private long id;
 
-    @OneToMany(mappedBy = "ship", fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "gamePlayer_id")
     private GamePlayer gamePlayer;
 
     private String type;
 
-    private List locations;
+    @ElementCollection
+    @Column(name = "locations")
+    private List<String> locations = new ArrayList<>();
+
     //Constructor
-    public Ship(){};
-    public Ship(long id, String type, List locations) {
-        this.id = id;
+    public Ship(){}
+    public Ship(GamePlayer gamePlayer, String type, List locations) {
+        this.gamePlayer = gamePlayer;
         this.type = type;
         this.locations = locations;
     }
@@ -36,5 +40,8 @@ public class Ship {
     }
     public List getLocations() {
         return locations;
+    }
+    public GamePlayer getGamePlayer() {
+        return gamePlayer;
     }
 }
