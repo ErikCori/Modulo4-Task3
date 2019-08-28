@@ -58,14 +58,6 @@ public class GamePlayer {
         return ships;
     }
 
-    //Setters
-    public void setPlayer(Player player){
-        this.player = player;
-    }
-    public void setGame(Game game){
-        this.game = game;
-    }
-
     public void addShip(Ship ship){
 
     }

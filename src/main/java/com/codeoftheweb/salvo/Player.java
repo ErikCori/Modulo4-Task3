@@ -32,22 +32,15 @@ public class Player {
     public long getId(){
         return id;
     }
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public String getUsername() {
-
         return username;
     }
-    public String toString() {
 
-        return username;
+    public Set<GamePlayer> getGamePlayers() {
+        return gamePlayers;
     }
-    public void addGamePlayer(GamePlayer gamePlayer){
-        gamePlayer.setPlayer(this);
-        gamePlayers.add(gamePlayer);
-    }
+
     public List<Game> getGames(){
         return gamePlayers.stream().map(gamePlayer -> gamePlayer.getGame()).collect(toList());
     }

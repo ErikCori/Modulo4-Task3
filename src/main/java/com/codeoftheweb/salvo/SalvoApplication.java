@@ -116,6 +116,24 @@ public class SalvoApplication {
 			Ship ship7 = new Ship(gamePlayer3, patrolBoat, Arrays.asList("C6", "C7"));
 			Ship ship8 = new Ship(gamePlayer4, submarine, Arrays.asList("A2", "A3", "A4"));
 			Ship ship9 = new Ship(gamePlayer4, patrolBoat, Arrays.asList("G6", "H6"));
+			Ship ship10 = new Ship(gamePlayer6, destroyer, Arrays.asList("B%", "C%", "D%"));
+			Ship ship11 = new Ship(gamePlayer6, patrolBoat, Arrays.asList("C6", "C7"));
+			Ship ship12 = new Ship(gamePlayer5, submarine, Arrays.asList("A2", "A3", "A4"));
+			Ship ship13 = new Ship(gamePlayer5, patrolBoat, Arrays.asList("G6", "H6"));
+			Ship ship14 = new Ship(gamePlayer7, destroyer, Arrays.asList("B5", "C%", "D5"));
+			Ship ship15 = new Ship(gamePlayer7, patrolBoat, Arrays.asList("C6", "C7"));
+			Ship ship16 = new Ship(gamePlayer8, submarine, Arrays.asList("A2","A3", "A4"));
+			Ship ship17 = new Ship(gamePlayer8, patrolBoat, Arrays.asList("G6", "H6"));
+			Ship ship18 = new Ship(gamePlayer9, destroyer, Arrays.asList("B5", "C5", "D5"));
+			Ship ship19 = new Ship(gamePlayer9, patrolBoat, Arrays.asList("C6", "C7"));
+			Ship ship20 = new Ship(gamePlayer10, submarine, Arrays.asList("A2","A3", "A4"));
+			Ship ship21 = new Ship(gamePlayer10, patrolBoat, Arrays.asList("G6", "H6"));
+			Ship ship22 = new Ship(gamePlayer11, destroyer, Arrays.asList("B5", "C5", "D5"));
+			Ship ship23 = new Ship(gamePlayer11, patrolBoat, Arrays.asList("C6", "C7"));
+			Ship ship24 = new Ship(gamePlayer15, destroyer, Arrays.asList("B5", "C5", "D5"));
+			Ship ship25 = new Ship(gamePlayer15, patrolBoat, Arrays.asList("C6", "C7"));
+			Ship ship26 = new Ship(gamePlayer16, submarine, Arrays.asList("A2", "A3", "A4"));
+			Ship ship27 = new Ship(gamePlayer16, patrolBoat, Arrays.asList("G6", "H6"));
 
 			shipRepository.save(ship1);
 			shipRepository.save(ship2);
@@ -126,6 +144,24 @@ public class SalvoApplication {
 			shipRepository.save(ship7);
 			shipRepository.save(ship8);
 			shipRepository.save(ship9);
+			shipRepository.save(ship10);
+			shipRepository.save(ship11);
+			shipRepository.save(ship12);
+			shipRepository.save(ship13);
+			shipRepository.save(ship14);
+			shipRepository.save(ship15);
+			shipRepository.save(ship16);
+			shipRepository.save(ship17);
+			shipRepository.save(ship18);
+			shipRepository.save(ship19);
+			shipRepository.save(ship20);
+			shipRepository.save(ship21);
+			shipRepository.save(ship22);
+			shipRepository.save(ship23);
+			shipRepository.save(ship24);
+			shipRepository.save(ship25);
+			shipRepository.save(ship26);
+			shipRepository.save(ship27);
 		};
 	}
 

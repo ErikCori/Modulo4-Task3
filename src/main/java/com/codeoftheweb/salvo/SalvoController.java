@@ -2,6 +2,7 @@ package com.codeoftheweb.salvo;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,13 +12,17 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("/api")
 public class SalvoController {
     @Autowired
-    private GameRepository repo;
+    private GameRepository gameRepository;
 
-    @RequestMapping("/api/games")
+    @Autowired
+    private GamePlayerRepository gamePlayerRepository;
+
+    @RequestMapping("/games")
     public List<Object> getAllGames() {
-        return repo.findAll().stream().map(game -> makeGameDto(game)).collect(Collectors.toList());
+        return gameRepository.findAll().stream().map(game -> makeGameDto(game)).collect(Collectors.toList());
     }
     private Map<String, Object> makeGameDto(Game game){
         Map<String, Object> dto = new LinkedHashMap<>();
@@ -37,6 +42,18 @@ public class SalvoController {
         dto.put("id", player.getId());
         dto.put("email", player.getUsername());
         return dto;
+    }
+
+    @RequestMapping("/game_view/{gamePlayerId}")
+    public Map<String, Object> findGamePlayer(@PathVariable Long gamePlayerId){
+        Map<String, Object> dto = new LinkedHashMap<>();
+        dto.put("id", gamePlayerId);
+
+        return dto;
+
+    }
+    public GamePlayer findGamePlayer(@PathVariable Long gamePlayerId){
+        return gamePlayerRepository.findById(gamePlayerId).orElseThrow(()->new );
     }
 
 }

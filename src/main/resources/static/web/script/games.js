@@ -29,7 +29,7 @@ function createTableContent(games){
     table +='<tbody>';
     games.forEach(function(game){
         table += '<tr>';
-        table += '<td>'+game.created+'</td>';
+        table += '<td>'+new Date(game.created).toLocaleString()+'</td>';
         if(game.gamePlayers[0] === null){
             table += '<td>'+"N/A"+'</td>';
         }else{
@@ -46,6 +46,3 @@ function createTableContent(games){
     table += '</tbody>';
     return table;
 }
-
-
-
