@@ -45,15 +45,21 @@ public class SalvoController {
     }
 
     @RequestMapping("/game_view/{gamePlayerId}")
-    public Map<String, Object> findGamePlayer(@PathVariable Long gamePlayerId){
+    public Map<String, Object> gameViewDto(@PathVariable Long gamePlayerId){
+        GamePlayer gamePlayer = gamePlayerRepository.getOne(gamePlayerId);
         Map<String, Object> dto = new LinkedHashMap<>();
-        dto.put("id", gamePlayerId);
-
+        dto.put("id", gamePlayer.getGame().getId());
+        dto.put("created", gamePlayer.getGame().getCreationDate());
+        dto.put("gamePlayers", gamePlayer.getGame().getGamePlayers().stream().map(g ->makeGamePlayerDto(g)));
+        dto.put("Ships", gamePlayer.getShips().stream().map(s -> makeShipDto(s)) );
         return dto;
+    }
+    private Map<String, Object> makeShipDto(Ship ship){
+        Map<String, Object> dto = new LinkedHashMap<>();
+        dto.put("type", ship.getType() );
+        dto.put("locations", ship.getLocations());
+        return dto;
+    }
 
-    }
-    public GamePlayer findGamePlayer(@PathVariable Long gamePlayerId){
-        return gamePlayerRepository.findById(gamePlayerId).orElseThrow(()->new );
-    }
 
 }
