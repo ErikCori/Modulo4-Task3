@@ -51,7 +51,7 @@ public class SalvoController {
         dto.put("id", gamePlayer.getGame().getId());
         dto.put("created", gamePlayer.getGame().getCreationDate());
         dto.put("gamePlayers", gamePlayer.getGame().getGamePlayers().stream().map(g ->makeGamePlayerDto(g)));
-        dto.put("Ships", gamePlayer.getShips().stream().map(s -> makeShipDto(s)) );
+        dto.put("ships", gamePlayer.getShips().stream().map(s -> makeShipDto(s)) );
         return dto;
     }
     private Map<String, Object> makeShipDto(Ship ship){

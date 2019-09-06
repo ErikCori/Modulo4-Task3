@@ -27,6 +27,7 @@ public class GamePlayer {
     @OneToMany(mappedBy = "gamePlayer", fetch = FetchType.EAGER)
     private Set<Ship> ships;
 
+    //Constructor
     public GamePlayer(){}
 
     public GamePlayer(Date joinDate, Game game, Player player){
@@ -58,7 +59,4 @@ public class GamePlayer {
         return ships;
     }
 
-    public void addShip(Ship ship){
-
-    }
 }

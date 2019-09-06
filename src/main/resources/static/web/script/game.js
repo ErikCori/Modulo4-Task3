@@ -1,52 +1,31 @@
-var app = new Vue({
-  el: '#app',
-  data: {
-    rows: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", ],
-    columns: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
-  }
-})
-var url = "http://localhost:8080/api/game_view/nn"
-fetch(url)
-  .then(function (myData) {
-    data = myData;
-  })
+$(function () {
+    loadData();
+});
 
-function createTableShipLocations() {
-  var table = document.getElementById('ship_locations_table');
-  table.innerHTML = "";
-  var tableContent = createTableShipContent(app.rows, app.columns);
-  table.innerHTML = tableContent;
-}
+function getParameterByName(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+};
 
-function createTableShipContent(rows, columns) {
-  var table = '<thead><tr><th></th>';
-  columns.forEach(function (column) {
-    table += '<th>' + column + '</th>';
-  });
-  table += '</tr></thead>';
-  table += '<tbody>'
+function loadData() {
+    $.get('/api/game_view/' + getParameterByName('gp'))
+        .done(function (data) {
+            console.log(data)
+            let playerInfo;
+            if (data.gamePlayers[0].id == getParameterByName('gp'))
+                playerInfo = [data.gamePlayers[0].player.email, data.gamePlayers[1].player.email];
+            else
+                playerInfo = [data.gamePlayers[1].player.email, data.gamePlayers[0].player.email];
 
+            $('#playerInfo').text(playerInfo[0] + '(you) vs ' + playerInfo[1]);
 
-  rows.forEach(function (row) {
-    table += '<tr>';
-    table += '<td >' + row + '</td>';
-    table += '</tr>';
-  })
-  /*table += '<td></td>';
-  table += '<td></td>';
-  table += '<td></td>';
-  table += '<td></td>';
-  table += '<td></td>';
-  table += '<td></td>';
-  table += '<td></td>';
-  table += '<td></td>';
-  table += '<td></td>';*/
-
-  for (var i = 1; i <= 10; i++) {
-    table += '<td id="A"+i></td>'
-  }
-  table += '</tr>';
-
-  table += '</tbody>';
-  return table;
-}
+            data.ships.forEach(function (shipPiece) {
+                shipPiece.locations.forEach(function (shipLocation) {
+                    $('#' + shipLocation).addClass('ship-piece');
+                })
+            });
+        })
+        .fail(function (jqXHR, textStatus) {
+            alert("Failed: " + textStatus);
+        });
+};

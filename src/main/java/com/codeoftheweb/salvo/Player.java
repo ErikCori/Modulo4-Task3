@@ -22,6 +22,7 @@ public class Player {
 
     private String username;
 
+    //Constructor
     public Player(){}
 
     public Player(String username){
@@ -29,6 +30,7 @@ public class Player {
         this.username = username;
     }
 
+    //Getters
     public long getId(){
         return id;
     }
@@ -41,7 +43,4 @@ public class Player {
         return gamePlayers;
     }
 
-    public List<Game> getGames(){
-        return gamePlayers.stream().map(gamePlayer -> gamePlayer.getGame()).collect(toList());
-    }
 }
