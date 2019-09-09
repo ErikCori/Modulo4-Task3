@@ -1,14 +1,13 @@
-package com.codeoftheweb.salvo;
+package com.codeoftheweb.salvo.Model;
 
 
+import com.codeoftheweb.salvo.Model.GamePlayer;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
-
-
-import static java.util.stream.Collectors.toList;
 
 @Entity
 public class Player {
@@ -43,4 +42,12 @@ public class Player {
         return gamePlayers;
     }
 
+    //Constroller
+
+    public Map<String, Object> makePlayerDto(){
+        Map<String, Object> dto = new LinkedHashMap<>();
+        dto.put("id", this.getId());
+        dto.put("email", this.getUsername());
+        return dto;
+    }
 }

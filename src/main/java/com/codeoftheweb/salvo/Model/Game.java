@@ -1,17 +1,9 @@
-package com.codeoftheweb.salvo;
+package com.codeoftheweb.salvo.Model;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-
-import static java.util.stream.Collectors.toList;
-
+import java.util.*;
 
 @Entity
 public class Game {
@@ -28,8 +20,10 @@ public class Game {
     //Constructor
     public Game(){}
 
-    public Game(Date creationDate){
-        this.creationDate = creationDate;
+    public Game(int plusHours){
+        int seconds = plusHours * 3600;
+        Date date = new Date();
+        this.creationDate = Date.from(date.toInstant().plusSeconds(seconds));
     }
 
     //Getters
@@ -41,5 +35,15 @@ public class Game {
     }
     public Set<GamePlayer> getGamePlayers() {
         return gamePlayers;
+    }
+
+    //Controller
+
+    public Map<String, Object> makeGameDto(){
+        Map<String, Object> dto = new LinkedHashMap<>();
+        dto.put("id", this.getId());
+        dto.put("created", this.getCreationDate());
+        dto.put("gamePlayers", this.getGamePlayers().stream().map(g -> g.makeGamePlayerDto()));
+        return dto;
     }
 }
